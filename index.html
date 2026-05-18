@@ -1,0 +1,209 @@
+# agrinho 
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agro Forte, Futuro Sustentável</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #e8f5e9;
+            color: #2e7d32;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            margin: 0;
+            color: #1b5e20;
+        }
+
+        .painel-status {
+            display: flex;
+            gap: 20px;
+            background: white;
+            padding: 15px 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+        }
+
+        .status {
+            font-weight: bold;
+        }
+
+        .jogo-container {
+            display: flex;
+            gap: 20px;
+            max-width: 800px;
+            width: 100%;
+        }
+
+        .coluna {
+            flex: 1;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        button {
+            background-color: #4caf50;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            font-size: 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.2s;
+            width: 100%;
+            margin-bottom: 10px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        button.btn-alerta {
+            background-color: #ff9800;
+        }
+        button.btn-alerta:hover {
+            background-color: #e65100;
+        }
+
+        #mensagem {
+            margin-top: 20px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            text-align: center;
+            min-height: 24px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Agro Forte, Futuro Sustentável</h1>
+        <p>Encontre o equilíbrio perfeito entre produzir alimentos e proteger o planeta!</p>
+    </header>
+
+    <div class="painel-status">
+        <div>Moedas: <span id="moedas" class="status">0</span> 🪙</div>
+        <div>Saúde do Meio Ambiente: <span id="ambiente" class="status">100</span>% 🌱</div>
+    </div>
+
+    <div class="jogo-container">
+        <div class="coluna">
+            <h3>Produção Avançada</h3>
+            <p>Ganha muitas moedas, mas impacta a natureza se abusar.</p>
+            <button onclick="produzirIntensivo()">Colheita Intensiva (+20 Moedas / -10% Ambiente)</button>
+            <button onclick="comprarTrator()">Investir em Tecnologia (+50 Moedas / -20% Ambiente)</button>
+        </div>
+
+        <div class="coluna">
+            <h3>Ações Sustentáveis</h3>
+            <p>Recupere o meio ambiente e garanta bônus ecológicos.</p>
+            <button class="btn-alerta" onclick="reflorestar()">Reflorestamento (+15% Ambiente / -10 Moedas)</button>
+            <button class="btn-alerta" onclick="organico()">Plantio Orgânico (+5% Ambiente / +5 Moedas)</button>
+        </div>
+    </div>
+
+    <div id="mensagem"></div>
+
+    <script>
+        // Variáveis de estado do jogo
+        let moedas = 0;
+        let saudeAmbiente = 100;
+
+        const txtMoedas = document.getElementById('moedas');
+        const txtAmbiente = document.getElementById('ambiente');
+        const txtMensagem = document.getElementById('mensagem');
+
+        // Função para atualizar a tela
+        function atualizarTela() {
+            txtMoedas.innerText = moedas;
+            txtAmbiente.innerText = saudeAmbiente;
+
+            // Altera a cor do texto do ambiente dependendo da gravidade
+            if (saudeAmbiente > 50) {
+                txtAmbiente.style.color = "#2e7d32"; // Verde
+            } else if (saudeAmbiente > 20) {
+                txtAmbiente.style.color = "#ff9800"; // Laranja
+            } else {
+                txtAmbiente.style.color = "#d32f2f"; // Vermelho
+            }
+
+            // Verifica condições de fim de jogo
+            verificarFimDeJogo();
+        }
+
+        // Ação: Colheita Intensiva
+        function produzirIntensivo() {
+            moedas += 20;
+            saudeAmbiente -= 10;
+            txtMensagem.innerText = "Você realizou uma grande colheita, mas o solo sofreu com o desgaste.";
+            atualizarTela();
+        }
+
+        // Ação: Investir em Tecnologia/Trator
+        function comprarTrator() {
+            moedas += 50;
+            saudeAmbiente -= 20;
+            txtMensagem.innerText = "Maquinário pesado acelerou a produção! Mas a emissão de carbono subiu.";
+            atualizarTela();
+        }
+
+        // Ação: Reflorestamento
+        function reflorestar() {
+            if (moedas >= 10) {
+                moedas -= 10;
+                saudeAmbiente = Math.min(saudeAmbiente + 15, 100); // Não passa de 100%
+                txtMensagem.innerText = "Árvores plantadas! A biodiversidade agradece.";
+            } else {
+                txtMensagem.innerText = "Você não tem moedas suficientes para reflorestar!";
+            }
+            atualizarTela();
+        }
+
+        // Ação: Plantio Orgânico
+        function organico() {
+            moedas += 5;
+            saudeAmbiente = Math.min(saudeAmbiente + 5, 100);
+            txtMensagem.innerText = "Cultivo sustentável realizado. Lucro moderado e solo protegido.";
+            atualizarTela();
+        }
+
+        // Validação de Vitória ou Derrota
+        function verificarFimDeJogo() {
+            if (saudeAmbiente <= 0) {
+                saudeAmbiente = 0;
+                txtAmbiente.innerText = 0;
+                alert("Fim de Jogo! O meio ambiente entrou em colapso devido à exploração excessiva. ❌");
+                reiniciarJogo();
+            } else if (moedas >= 300 && saudeAmbiente >= 70) {
+                alert("Parabéns! Você alcançou o Agro Sustentável: 300 moedas e a natureza preservada! 🏆🌱");
+                reiniciarJogo();
+            }
+        }
+
+        // Reiniciar o jogo
+        function reiniciarJogo() {
+            moedas = 0;
+            saudeAmbiente = 100;
+            txtMensagem.innerText = "Jogo reiniciado. Encontre o equilíbrio!";
+            atualizarTela();
+        }
+    </script>
+</body>
+</html>
