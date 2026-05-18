@@ -1,0 +1,111 @@
+/* Configurações Gerais */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f1f8e9; /* Verde bem claro, focado em ecologia */
+    color: #2e7d32;
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+header h1 {
+    margin: 0;
+    color: #1b5e20;
+    font-size: 2.5rem;
+}
+
+header p {
+    color: #558b2f;
+    font-style: italic;
+}
+
+/* Painel de Status (Placar) */
+.painel-status {
+    display: flex;
+    gap: 40px;
+    background: #ffffff;
+    padding: 20px 40px;
+    border-radius: 15px;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.06);
+    margin-bottom: 30px;
+    font-size: 1.3rem;
+    border: 2px solid #c8e6c9;
+}
+
+.status {
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+/* Containers e Colunas */
+.jogo-container {
+    display: flex;
+    gap: 25px;
+    max-width: 900px;
+    width: 100%;
+}
+
+.coluna {
+    flex: 1;
+    background: #ffffff;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    text-align: center;
+    border-top: 5px solid #4caf50;
+}
+
+/* A coluna de sustentabilidade ganha um tom azul/verde diferente */
+.coluna-sustentavel {
+    border-top: 5px solid #009688;
+}
+
+/* Botões de Ação */
+button {
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    padding: 14px 20px;
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    width: 100%;
+    margin-bottom: 12px;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+}
+
+button:hover {
+    background-color: #388e3c;
+    transform: translateY(-2px);
+}
+
+button.btn-eco {
+    background-color: #009688;
+}
+
+button.btn-eco:hover {
+    background-color: #00796b;
+}
+
+/* Caixa de Mensagens e Alertas */
+#mensagem {
+    margin-top: 25px;
+    font-weight: 500;
+    font-size: 1.1rem;
+    color: #37474f;
+    background: #eceff1;
+    padding: 12px 25px;
+    border-radius: 8px;
+    text-align: center;
+    min-height: 24px;
+    max-width: 600px;
+}
